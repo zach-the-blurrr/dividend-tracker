@@ -1,22 +1,32 @@
-import { Link } from "react-router-dom";
-import "./NavBar.css";
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <nav className="navbar">
-      <div className="nav-left">
-        <Link to="/" className="nav-logo">
+    <AppBar position="static">
+      <Toolbar>
+        <Typography
+          variant="h6"
+          component={RouterLink}
+          to="/"
+          style={{
+            color: "inherit",
+            textDecoration: "none",
+            flexGrow: 1,
+          }}
+        >
           Dividend Tracker
-        </Link>
-      </div>
-      <div className="nav-right">
-        <Link to="/" className="nav-link">
-          Sample
-        </Link>
-        <Link to="/home" className="nav-link">
-          Home
-        </Link>
-      </div>
-    </nav>
+        </Typography>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button color="inherit" component={RouterLink} to="/">
+            Sample
+          </Button>
+
+          <Button color="inherit" component={RouterLink} to="/home">
+            Home
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
