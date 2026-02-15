@@ -3,43 +3,43 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Sample from "./pages/Sample";
 import NavBar from "./components/NavBar";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
+import { themeModeAtom } from "./atoms/themeModeAtom";
+import { useRecoilValue } from "recoil";
 
-const prefersDarkMode = window.matchMedia(
-  "(prefers-color-scheme: dark)",
-).matches;
+function App() {
+  const themeMode = useRecoilValue(themeModeAtom);
 
-const theme = createTheme({
-  palette: {
-    mode: prefersDarkMode ? "dark" : "light",
-    primary: {
-      main: prefersDarkMode ? "#66BB6A" : "#2E7D32",
-    },
-    secondary: {
-      main: "#0288D1",
-    },
-  },
-  components: {
-    MuiAppBar: {
-      styleOverrides: {
-        colorPrimary: {
-          backgroundColor: prefersDarkMode ? "#66BB6A" : "#2E7D32",
-        },
+  const theme = createTheme({
+    palette: {
+      mode: themeMode,
+      primary: {
+        main: themeMode === "dark" ? "#66BB6A" : "#2E7D32",
+      },
+      secondary: {
+        main: "#0288D1",
       },
     },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          "&:hover": {
-            backgroundColor: "transparent",
-            color: "#FFFFFFCC",
+    components: {
+      MuiAppBar: {
+        styleOverrides: {
+          colorPrimary: {
+            backgroundColor: themeMode === "dark" ? "#66BB6A" : "#2E7D32",
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "#FFFFFFCC",
+            },
           },
         },
       },
     },
-  },
-});
+  });
 
-function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

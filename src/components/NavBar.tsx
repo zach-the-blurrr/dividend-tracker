@@ -1,7 +1,10 @@
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { themeModeAtom } from "../atoms/themeModeAtom";
 
 export default function NavBar() {
+  const [themeMode, setThemeMode] = useRecoilState(themeModeAtom);
   return (
     <AppBar position="static">
       <Toolbar>
@@ -24,6 +27,14 @@ export default function NavBar() {
 
           <Button color="inherit" component={RouterLink} to="/home">
             Home
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() =>
+              setThemeMode(themeMode === "light" ? "dark" : "light")
+            }
+          >
+            Theme: {themeMode}
           </Button>
         </Box>
       </Toolbar>
