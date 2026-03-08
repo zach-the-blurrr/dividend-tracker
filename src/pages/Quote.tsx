@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getQuote } from "../services/finnhubService";
+import type { QuoteResponse } from "../types/QuoteResponse";
 
 export default function Home() {
-  const [quote, setQuote] = useState(null);
+  const [quote, setQuote] = useState<QuoteResponse | null>(null);
 
   useEffect(() => {
     async function fetchData() {
