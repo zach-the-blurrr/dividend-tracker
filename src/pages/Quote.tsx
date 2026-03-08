@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getQuote } from "../services/finnHubService";
+import { getQuote } from "../services/finnhubService";
 
 export default function Home() {
   const [quote, setQuote] = useState(null);
