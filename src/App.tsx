@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 import { themeModeAtom } from "./atoms/themeModeAtom";
 import { useRecoilValue } from "recoil";
+import Quote from "./pages/Quote";
 
 function App() {
   const themeMode = useRecoilValue(themeModeAtom);
@@ -47,7 +48,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Sample />} />
-          <Route path="/home" element={<h1>HOME PAGE</h1>} />
+          <Route path="/home" element={<Quote />} />
         </Routes>
       </HashRouter>
     </ThemeProvider>
