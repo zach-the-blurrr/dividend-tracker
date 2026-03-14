@@ -25,7 +25,7 @@ export default function NavBar() {
             Sample
           </Button>
 
-          <Button color="inherit" component={RouterLink} to="/home">
+          <Button color="inherit" component={RouterLink} to="/quote">
             Quote
           </Button>
           <Button

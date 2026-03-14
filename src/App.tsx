@@ -48,7 +48,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Sample />} />
-          <Route path="/home" element={<Quote />} />
+          <Route path="/quote" element={<Quote />} />
         </Routes>
       </HashRouter>
     </ThemeProvider>
