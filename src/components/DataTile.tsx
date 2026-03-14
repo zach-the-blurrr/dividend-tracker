@@ -2,6 +2,7 @@ import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import type { QuoteResponse } from "../types/QuoteResponse";
 import { getQuote } from "../services/finnhubService";
+import DataTileRow from "./DataTileRow";
 
 type DataTileProps = {
   symbol: string;
@@ -17,24 +18,14 @@ export default function DataTile({ symbol }: DataTileProps) {
     }
     fetchData();
   }, [symbol]);
-
-  const usd = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
   return (
     <Card>
       <CardContent>
+        <Typography variant="h6">{symbol}</Typography>
         <Stack spacing={1}>
-          <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body2" color="text.secondary">
-              Current Price
-            </Typography>
-            <Typography variant="body1">
-              {quote ? usd.format(quote.c) : "--"}
-            </Typography>
-          </Stack>
+          <DataTileRow label="Current Price" usdAmount={quote ? quote.c : 0} />
+          <DataTileRow label="Today's High" usdAmount={quote ? quote.h : 0} />
+          <DataTileRow label="Today's Low" usdAmount={quote ? quote.l : 0} />
         </Stack>
       </CardContent>
     </Card>
