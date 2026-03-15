@@ -1,7 +1,9 @@
+import type { AlphaVantageDividendResponse } from "../types/AlphaVantageDividendResponse";
+
 const API_KEY = import.meta.env.VITE_ALPHAVANTAGE_API_KEY;
 const BASE_URL = "https://www.alphavantage.co/query";
 
-export async function getDividendHistory(symbol: string) {
+export async function getDividendHistory(symbol: string): Promise<AlphaVantageDividendResponse | null> {
     const url = `${BASE_URL}?function=DIVIDENDS&symbol=${symbol}&apikey=${API_KEY}`;
 
     try{
