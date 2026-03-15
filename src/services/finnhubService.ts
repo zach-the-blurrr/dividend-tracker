@@ -13,7 +13,7 @@ export async function getQuote(ticker: string): Promise<QuoteResponse | null> {
     }
     return await result.json();
   } catch (error) {
-    console.error("Error fetching quote:", error);
+    console.error("Error fetching quote: ", error);
     return null;
   }
 }
