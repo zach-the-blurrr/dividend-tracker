@@ -4,6 +4,7 @@ import type { QuoteResponse } from "../types/QuoteResponse";
 import { getQuote } from "../services/finnhubService";
 import DataTileRow from "./DataTileRow";
 import FavoriteButton from "./FavoriteButton";
+import { getDividends } from "../services/financialModelingPrepService";
 
 type DataTileProps = {
   symbol: string;
@@ -16,6 +17,12 @@ export default function DataTile({ symbol }: DataTileProps) {
   useEffect(() => {
     async function fetchData() {
       const data = await getQuote(symbol);
+
+      //begin dividend endpoint test
+      const dividends = await getDividends(symbol);
+      console.log(dividends);
+      //end dividend endpoint test
+
       setQuote(data);
     }
     fetchData();
