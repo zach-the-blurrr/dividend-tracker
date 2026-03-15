@@ -4,7 +4,7 @@ import type { QuoteResponse } from "../types/QuoteResponse";
 import { getQuote } from "../services/finnhubService";
 import DataTileRow from "./DataTileRow";
 import FavoriteButton from "./FavoriteButton";
-import { getDividends } from "../services/financialModelingPrepService";
+import { getDividendHistory } from "../services/alphaVantageService";
 
 type DataTileProps = {
   symbol: string;
@@ -18,10 +18,10 @@ export default function DataTile({ symbol }: DataTileProps) {
     async function fetchData() {
       const data = await getQuote(symbol);
 
-      //begin dividend endpoint test
-      const dividends = await getDividends(symbol);
+      //begin AV dividend endpoint test
+      const dividends = await getDividendHistory(symbol);
       console.log(dividends);
-      //end dividend endpoint test
+      //end AV dividend endpoint test
 
       setQuote(data);
     }
