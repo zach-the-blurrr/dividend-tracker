@@ -5,6 +5,8 @@ import { getQuote } from "../services/finnhubService";
 import DataTileRow from "./DataTileRow";
 import FavoriteButton from "./FavoriteButton";
 import { getDividendHistory } from "../services/alphaVantageService";
+import { favoritesAtom } from "../atoms/favoritesAtom";
+import { useRecoilState } from "recoil";
 
 type DataTileProps = {
   symbol: string;
@@ -12,21 +14,33 @@ type DataTileProps = {
 
 export default function DataTile({ symbol }: DataTileProps) {
   const [quote, setQuote] = useState<QuoteResponse | null>(null);
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [favorites, setFavorites] = useRecoilState(favoritesAtom);
+
+  const isFavorite = favorites.includes(symbol);
 
   useEffect(() => {
     async function fetchData() {
       const data = await getQuote(symbol);
 
+      //TODO: clean this up once we're actually using this endpoint
       //begin AV dividend endpoint test
       const dividends = await getDividendHistory(symbol);
       console.log(dividends);
+      console.log(favorites);
       //end AV dividend endpoint test
 
       setQuote(data);
     }
     fetchData();
   }, [symbol]);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      setFavorites(favorites.filter((s) => s !== symbol));
+    } else {
+      setFavorites([...favorites, symbol]);
+    }
+  };
 
   return (
     <Card>
@@ -37,10 +51,7 @@ export default function DataTile({ symbol }: DataTileProps) {
           alignItems="center"
         >
           <Typography variant="h6">{symbol}</Typography>
-          <FavoriteButton
-            isFavorite={isFavorite}
-            onToggle={() => setIsFavorite(!isFavorite)}
-          />
+          <FavoriteButton isFavorite={isFavorite} onToggle={toggleFavorite} />
         </Stack>
         <Stack spacing={1}>
           <DataTileRow label="Current Price" usdAmount={quote ? quote.c : 0} />
