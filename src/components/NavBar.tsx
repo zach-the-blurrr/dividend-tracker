@@ -21,7 +21,7 @@ export default function NavBar() {
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button color="inherit" component={RouterLink} to="/">
-            Sample
+            Home
           </Button>
           <Button color="inherit" component={RouterLink} to="/quote">
             Quote

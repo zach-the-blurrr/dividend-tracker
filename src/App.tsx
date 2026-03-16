@@ -1,6 +1,6 @@
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Sample from "./pages/Sample";
+import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 import { themeModeAtom } from "./atoms/themeModeAtom";
@@ -48,7 +48,7 @@ function App() {
       <HashRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Sample />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/quote" element={<Quote />} />
           <Route path="/favorites" element={<FavoritePage />} />
         </Routes>
