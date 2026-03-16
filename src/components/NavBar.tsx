@@ -6,8 +6,8 @@ import { themeModeAtom } from "../atoms/themeModeAtom";
 export default function NavBar() {
   const [themeMode, setThemeMode] = useRecoilState(themeModeAtom);
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar>
+      <Toolbar sx={{ width: "100%" }}>
         <Typography
           variant="h6"
           component={RouterLink}
@@ -28,6 +28,11 @@ export default function NavBar() {
           <Button color="inherit" component={RouterLink} to="/quote">
             Quote
           </Button>
+
+          <Button color="inherit" component={RouterLink} to="/favorites">
+            Favorites
+          </Button>
+
           <Button
             color="inherit"
             onClick={() =>

@@ -4,30 +4,24 @@ import type { QuoteResponse } from "../types/QuoteResponse";
 import { getQuote } from "../services/finnhubService";
 import DataTileRow from "./DataTileRow";
 import FavoriteButton from "./FavoriteButton";
-import { getDividendHistory } from "../services/alphaVantageService";
 import { favoritesAtom } from "../atoms/favoritesAtom";
 import { useRecoilState } from "recoil";
 
 type DataTileProps = {
   symbol: string;
+  width?: number;
 };
 
-export default function DataTile({ symbol }: DataTileProps) {
+export default function DataTile({ symbol, width }: DataTileProps) {
   const [quote, setQuote] = useState<QuoteResponse | null>(null);
   const [favorites, setFavorites] = useRecoilState(favoritesAtom);
 
   const isFavorite = favorites.includes(symbol);
+  const calcWidth = width ? width : 350;
 
   useEffect(() => {
     async function fetchData() {
       const data = await getQuote(symbol);
-
-      //TODO: clean this up once we're actually using this endpoint
-      //begin AV dividend endpoint test
-      const dividends = await getDividendHistory(symbol);
-      console.log(dividends);
-      console.log(favorites);
-      //end AV dividend endpoint test
 
       setQuote(data);
     }
@@ -43,7 +37,7 @@ export default function DataTile({ symbol }: DataTileProps) {
   };
 
   return (
-    <Card>
+    <Card sx={{ width: calcWidth }}>
       <CardContent>
         <Stack
           direction="row"

@@ -6,6 +6,7 @@ import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 import { themeModeAtom } from "./atoms/themeModeAtom";
 import { useRecoilValue } from "recoil";
 import Quote from "./pages/Quote";
+import FavoritePage from "./pages/FavoritePage";
 
 function App() {
   const themeMode = useRecoilValue(themeModeAtom);
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Sample />} />
           <Route path="/quote" element={<Quote />} />
+          <Route path="/favorites" element={<FavoritePage />} />
         </Routes>
       </HashRouter>
     </ThemeProvider>
