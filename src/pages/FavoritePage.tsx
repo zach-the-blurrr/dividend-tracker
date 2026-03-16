@@ -10,7 +10,7 @@ export default function FavoritePage() {
     <Stack direction="row" justifyContent="space-between">
       <Grid container spacing={2}>
         {favorites.map((f) => (
-          <DataTile symbol={f} width={275} />
+          <DataTile key={f} symbol={f} width={275} />
         ))}
       </Grid>
     </Stack>
