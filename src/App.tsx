@@ -7,6 +7,7 @@ import { themeModeAtom } from "./atoms/themeModeAtom";
 import { useRecoilValue } from "recoil";
 import Quote from "./pages/Quote";
 import FavoritePage from "./pages/FavoritePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const themeMode = useRecoilValue(themeModeAtom);
@@ -51,6 +52,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/quote" element={<Quote />} />
           <Route path="/favorites" element={<FavoritePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </HashRouter>
     </ThemeProvider>
