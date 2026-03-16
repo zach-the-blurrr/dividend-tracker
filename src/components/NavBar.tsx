@@ -1,10 +1,8 @@
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { themeModeAtom } from "../atoms/themeModeAtom";
+import ThemeToggle from "./ThemeToggle";
 
 export default function NavBar() {
-  const [themeMode, setThemeMode] = useRecoilState(themeModeAtom);
   return (
     <AppBar>
       <Toolbar sx={{ width: "100%" }}>
@@ -16,6 +14,7 @@ export default function NavBar() {
             color: "inherit",
             textDecoration: "none",
             flexGrow: 1,
+            textAlign: "left",
           }}
         >
           Dividend Tracker
@@ -24,23 +23,13 @@ export default function NavBar() {
           <Button color="inherit" component={RouterLink} to="/">
             Sample
           </Button>
-
           <Button color="inherit" component={RouterLink} to="/quote">
             Quote
           </Button>
-
           <Button color="inherit" component={RouterLink} to="/favorites">
             Favorites
           </Button>
-
-          <Button
-            color="inherit"
-            onClick={() =>
-              setThemeMode(themeMode === "light" ? "dark" : "light")
-            }
-          >
-            Theme: {themeMode}
-          </Button>
+          <ThemeToggle />
         </Box>
       </Toolbar>
     </AppBar>
