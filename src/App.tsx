@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import Quote from "./pages/Quote";
 import FavoritePage from "./pages/FavoritePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import NavBarSpacer from "./components/layout/NavBarSpacer";
 
 function App() {
   const themeMode = useRecoilValue(themeModeAtom);
@@ -48,6 +49,7 @@ function App() {
       <CssBaseline />
       <HashRouter>
         <NavBar />
+        <NavBarSpacer />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/quote" element={<Quote />} />
