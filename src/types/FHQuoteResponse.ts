@@ -1,4 +1,4 @@
-export interface QuoteResponse {
+export interface FHQuoteResponse {
   c: number;  // current price
   d: number;  // change
   dp: number; // percent change
