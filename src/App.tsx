@@ -9,6 +9,7 @@ import Quote from "./pages/Quote";
 import FavoritePage from "./pages/FavoritePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import NavBarSpacer from "./components/layout/NavBarSpacer";
+import FavoriteLimitModal from "./components/favorites/FavoriteLimitModal";
 
 function App() {
   const themeMode = useRecoilValue(themeModeAtom);
@@ -35,8 +36,11 @@ function App() {
         styleOverrides: {
           root: {
             "&:hover": {
-              backgroundColor: "transparent",
-              color: "#FFFFFFCC",
+              backgroundColor:
+                themeMode === "dark"
+                  ? "rgba(102, 187, 106, 0.4)"
+                  : "rgba(46, 125, 50, 0.4)",
+              color: "rgb(255, 255, 255)",
             },
           },
         },
@@ -46,6 +50,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <FavoriteLimitModal />
       <CssBaseline />
       <HashRouter>
         <NavBar />
