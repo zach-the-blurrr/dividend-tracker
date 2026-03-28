@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { favoritesAtom } from "../atoms/favoritesAtom";
+import { favoritesAtom } from "../atoms/favorites/favoritesAtom";
 import DataTile from "../components/DataTile";
 import { Grid, Stack, Typography } from "@mui/material";
 

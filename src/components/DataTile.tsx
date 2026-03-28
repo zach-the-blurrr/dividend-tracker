@@ -1,12 +1,13 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import DataTileRow from "./DataTileRow";
-import FavoriteButton from "./FavoriteButton";
-import { favoritesAtom } from "../atoms/favoritesAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import FavoriteButton from "./favorites/FavoriteButton";
+import { favoritesAtom } from "../atoms/favorites/favoritesAtom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import type { DataTileModel } from "../types/DataTileModel";
 import { getDataTileModel } from "../services/quoteService";
-import { favoritesCapacityAtom } from "../atoms/favoritesCapacityAtom";
+import { favoritesCapacityAtom } from "../atoms/favorites/favoritesCapacityAtom";
+import { showFavoriteLimitModalAtom } from "../atoms/favorites/showFavoriteLimitModalAtom";
 
 type DataTileProps = {
   symbol: string;
@@ -16,6 +17,9 @@ type DataTileProps = {
 export default function DataTile({ symbol, width }: DataTileProps) {
   const [quote, setQuote] = useState<DataTileModel | null>(null);
   const [favorites, setFavorites] = useRecoilState(favoritesAtom);
+  const setShowFavoriteLimitModal = useSetRecoilState(
+    showFavoriteLimitModalAtom,
+  );
   const favoritesCapacity = useRecoilValue(favoritesCapacityAtom);
 
   const isFavorite = favorites.includes(symbol);
@@ -31,7 +35,7 @@ export default function DataTile({ symbol, width }: DataTileProps) {
 
   const toggleFavorite = () => {
     if (!isFavorite && favorites.length >= favoritesCapacity) {
-      console.log("whoops can't add anymore :(");
+      setShowFavoriteLimitModal(true);
       return;
     }
     if (isFavorite) {
