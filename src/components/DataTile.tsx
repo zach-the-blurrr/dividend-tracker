@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import DataTileRow from "./DataTileRow";
 import FavoriteButton from "./FavoriteButton";
 import { favoritesAtom } from "../atoms/favoritesAtom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import type { DataTileModel } from "../types/DataTileModel";
 import { getDataTileModel } from "../services/quoteService";
+import { favoritesCapacityAtom } from "../atoms/favoritesCapacityAtom";
 
 type DataTileProps = {
   symbol: string;
@@ -15,6 +16,7 @@ type DataTileProps = {
 export default function DataTile({ symbol, width }: DataTileProps) {
   const [quote, setQuote] = useState<DataTileModel | null>(null);
   const [favorites, setFavorites] = useRecoilState(favoritesAtom);
+  const favoritesCapacity = useRecoilValue(favoritesCapacityAtom);
 
   const isFavorite = favorites.includes(symbol);
   const calcWidth = width ? width : 350;
@@ -28,6 +30,10 @@ export default function DataTile({ symbol, width }: DataTileProps) {
   }, [symbol]);
 
   const toggleFavorite = () => {
+    if (!isFavorite && favorites.length >= favoritesCapacity) {
+      console.log("whoops can't add anymore :(");
+      return;
+    }
     if (isFavorite) {
       setFavorites(favorites.filter((s) => s !== symbol));
     } else {
