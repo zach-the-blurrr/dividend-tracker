@@ -1,16 +1,11 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getQuote } from "../services/finnhubService";
 import DataTileRow from "./DataTileRow";
 import FavoriteButton from "./FavoriteButton";
 import { favoritesAtom } from "../atoms/favoritesAtom";
 import { useRecoilState } from "recoil";
-import { globalQuote } from "../services/alphaVantage/alphaVantageService";
 import type { DataTileModel } from "../types/DataTileModel";
-import {
-  mapAVQuoteToDataTile,
-  mapFHQuoteToDataTile,
-} from "../services/mapDataTileModel";
+import { getDataTileModel } from "../services/quoteService";
 
 type DataTileProps = {
   symbol: string;
@@ -24,24 +19,9 @@ export default function DataTile({ symbol, width }: DataTileProps) {
   const isFavorite = favorites.includes(symbol);
   const calcWidth = width ? width : 350;
 
-  // try hitting finnhub first. if it fails (likely due to rate limits) try alphavantage
   useEffect(() => {
     async function fetchData() {
-      let data: DataTileModel | null = null;
-      try {
-        const fhResult = await getQuote(symbol);
-        if (fhResult) {
-          data = mapFHQuoteToDataTile(fhResult);
-        } else {
-          throw new Error("Finnhub returned null");
-        }
-      } catch {
-        const avResult = await globalQuote(symbol);
-        if (avResult) {
-          data = mapAVQuoteToDataTile(avResult);
-        }
-      }
-
+      const data = await getDataTileModel(symbol);
       setQuote(data);
     }
     fetchData();
@@ -67,15 +47,9 @@ export default function DataTile({ symbol, width }: DataTileProps) {
           <FavoriteButton isFavorite={isFavorite} onToggle={toggleFavorite} />
         </Stack>
         <Stack spacing={1}>
-          <DataTileRow
-            label="Current Price"
-            usdAmount={quote ? quote.current : 0}
-          />
-          <DataTileRow
-            label="Today's High"
-            usdAmount={quote ? quote.high : 0}
-          />
-          <DataTileRow label="Today's Low" usdAmount={quote ? quote.low : 0} />
+          <DataTileRow label="Current Price" usdAmount={quote?.current ?? 0} />
+          <DataTileRow label="Today's High" usdAmount={quote?.high ?? 0} />
+          <DataTileRow label="Today's Low" usdAmount={quote?.low ?? 0} />
         </Stack>
       </CardContent>
     </Card>
