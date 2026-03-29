@@ -24,6 +24,9 @@ function App() {
       secondary: {
         main: "#0288D1",
       },
+      text: {
+        primary: themeMode === "dark" ? "#FFFFFF" : "#000000",
+      },
     },
     components: {
       MuiAppBar: {
