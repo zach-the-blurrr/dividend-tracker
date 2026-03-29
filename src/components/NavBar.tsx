@@ -29,6 +29,9 @@ export default function NavBar() {
           <Button color="inherit" component={RouterLink} to="/favorites">
             Favorites
           </Button>
+          <Button color="inherit" component={RouterLink} to="projections">
+            Projections
+          </Button>
           <ThemeToggle />
         </Box>
       </Toolbar>
