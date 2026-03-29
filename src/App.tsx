@@ -10,6 +10,7 @@ import FavoritePage from "./pages/FavoritePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import NavBarSpacer from "./components/layout/NavBarSpacer";
 import FavoriteLimitModal from "./components/favorites/FavoriteLimitModal";
+import ProjectionPage from "./pages/ProjectionPage";
 
 function App() {
   const themeMode = useRecoilValue(themeModeAtom);
@@ -22,6 +23,9 @@ function App() {
       },
       secondary: {
         main: "#0288D1",
+      },
+      text: {
+        primary: themeMode === "dark" ? "#FFFFFF" : "#000000",
       },
     },
     components: {
@@ -59,6 +63,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/quote" element={<Quote />} />
           <Route path="/favorites" element={<FavoritePage />} />
+          <Route path="/projections" element={<ProjectionPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </HashRouter>
