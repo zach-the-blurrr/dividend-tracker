@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { favoritesAtom } from "../atoms/favorites/favoritesAtom";
-import DataTile from "../components/DataTile";
 import { Grid, Stack, Typography } from "@mui/material";
+import DataTile from "../components/datatile/DataTile";
 
 export default function FavoritePage() {
   const [favorites] = useRecoilState(favoritesAtom);

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Card, CardContent, Container, Typography } from "@mui/material";
-import { themeModeAtom } from "../../atoms/themeModeAtom";
+import { themeModeAtom } from "../../atoms/theme/themeModeAtom";
 import { useTheme } from "@mui/material/styles";
 import { useRecoilValue } from "recoil";
 

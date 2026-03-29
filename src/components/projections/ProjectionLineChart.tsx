@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material/styles";
+import ToolTip from "./ToolTip";
 
 const ProjectionPage = () => {
   const theme = useTheme();
@@ -20,8 +21,8 @@ const ProjectionPage = () => {
         { x: "Aug", y: 280 },
         { x: "Sep", y: 350 },
         { x: "Oct", y: 420 },
-        { x: "Nov", y: 430 },
-        { x: "Dec", y: 400 },
+        { x: "Nov", y: 550 },
+        { x: "Dec", y: 1000 },
       ],
     },
   ];
@@ -43,6 +44,7 @@ const ProjectionPage = () => {
           legend: "Income ($)",
           legendOffset: -50,
           legendPosition: "middle",
+          format: (value) => `$${value.toLocaleString()}`,
         }}
         theme={{
           axis: {
@@ -63,7 +65,10 @@ const ProjectionPage = () => {
         pointSize={8}
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}
+        enableSlices={false}
+        enableCrosshair={false}
         useMesh={true}
+        tooltip={({ point }) => <ToolTip point={point} />}
       />
     </Box>
   );

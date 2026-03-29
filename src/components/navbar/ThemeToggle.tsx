@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import { useRecoilState } from "recoil";
-import { themeModeAtom } from "../atoms/themeModeAtom";
+import { themeModeAtom } from "../../atoms/theme/themeModeAtom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 

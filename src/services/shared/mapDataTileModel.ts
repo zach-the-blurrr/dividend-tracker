@@ -1,6 +1,6 @@
-import type { AVQuote } from "../types/AVGlobalQuoteResponse";
-import type { DataTileModel } from "../types/DataTileModel";
-import type { FHQuoteResponse } from "../types/FHQuoteResponse";
+import type { AVQuote } from "../../types/AVGlobalQuoteResponse";
+import type { DataTileModel } from "../../types/DataTileModel";
+import type { FHQuoteResponse } from "../../types/FHQuoteResponse";
 
 export function mapAVQuoteToDataTile(quote: AVQuote | null): DataTileModel | null {
     if(!quote || typeof quote.price !== "number" || typeof quote.high !== "number" || typeof quote.low !== "number") {
