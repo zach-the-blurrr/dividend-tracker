@@ -1,13 +1,13 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import DataTileRow from "./DataTileRow";
-import FavoriteButton from "./favorites/FavoriteButton";
-import { favoritesAtom } from "../atoms/favorites/favoritesAtom";
+import FavoriteButton from "../favorites/FavoriteButton";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import type { DataTileModel } from "../types/DataTileModel";
-import { getDataTileModel } from "../services/quoteService";
-import { favoritesCapacityAtom } from "../atoms/favorites/favoritesCapacityAtom";
-import { showFavoriteLimitModalAtom } from "../atoms/favorites/showFavoriteLimitModalAtom";
+import type { DataTileModel } from "../../types/DataTileModel";
+import { getDataTileModel } from "../../services/shared/quoteService";
+import { favoritesCapacityAtom } from "../../atoms/favorites/favoritesCapacityAtom";
+import { favoritesAtom } from "../../atoms/favorites/favoritesAtom";
+import { showFavoriteLimitModalAtom } from "../../atoms/favorites/showFavoriteLimitModalAtom";
 
 type DataTileProps = {
   symbol: string;

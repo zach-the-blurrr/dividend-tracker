@@ -1,14 +1,14 @@
 import "./App.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
-import { themeModeAtom } from "./atoms/themeModeAtom";
+import { themeModeAtom } from "./atoms/theme/themeModeAtom";
 import { useRecoilValue } from "recoil";
 import Quote from "./pages/Quote";
 import FavoritePage from "./pages/FavoritePage";
 import NotFoundPage from "./pages/NotFoundPage";
-import NavBarSpacer from "./components/layout/NavBarSpacer";
+import NavBarSpacer from "./components/navbar/NavBarSpacer";
 import FavoriteLimitModal from "./components/favorites/FavoriteLimitModal";
 import ProjectionPage from "./pages/ProjectionPage";
 

@@ -1,4 +1,4 @@
-import type { FHQuoteResponse } from "../types/FHQuoteResponse";
+import type { FHQuoteResponse } from "../../types/FHQuoteResponse";
 
 const API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 const BASE_URL = 'https://finnhub.io/api/v1/';

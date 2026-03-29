@@ -1,6 +1,6 @@
-import type { DataTileModel } from "../types/DataTileModel";
-import { globalQuote } from "./alphaVantage/alphaVantageService";
-import { getQuote } from "./finnhubService";
+import type { DataTileModel } from "../../types/DataTileModel";
+import { globalQuote } from "../alphaVantage/alphaVantageService";
+import { getQuote } from "../finnhub/finnhubService";
 import { mapAVQuoteToDataTile, mapFHQuoteToDataTile } from "./mapDataTileModel";
 
 const quoteCache: Record<string, { data: DataTileModel; timestamp: number }> = {};
