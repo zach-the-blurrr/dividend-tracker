@@ -42,17 +42,17 @@ export default function DataTile({ symbol, width }: DataTileProps) {
     if (isFavorite) {
       setFavorites(favorites.filter((s) => s.symbol !== symbol));
     } else {
-      setFavorites([...favorites, { symbol, quantity: 0 }]);
+      setFavorites([...favorites, { symbol, holdings: 0 }]);
     }
   };
 
   const favorite = favorites.find((f) => f.symbol === symbol);
-  const quantity = favorite?.quantity ?? 0;
+  const holdings = favorite?.holdings ?? 0;
 
-  const updateQuantity = (symbol: string, newQuantity: number) => {
+  const updateHoldings = (symbol: string, newHoldings: number) => {
     setFavorites((prev) =>
       prev.map((f) =>
-        f.symbol === symbol ? { ...f, quantity: newQuantity } : f,
+        f.symbol === symbol ? { ...f, holdings: newHoldings } : f,
       ),
     );
   };
@@ -74,12 +74,14 @@ export default function DataTile({ symbol, width }: DataTileProps) {
           <DataTileRow label="Today's Low" usdAmount={quote?.low ?? 0} />
         </Stack>
         <Stack>
-          <CustomInput
-            label="Holdings"
-            type="number"
-            value={quantity}
-            onChange={(v) => updateQuantity(symbol, Number(v))}
-          />
+          {isFavorite && (
+            <CustomInput
+              label="Holdings"
+              type="number"
+              value={holdings}
+              onChange={(v) => updateHoldings(symbol, Number(v))}
+            />
+          )}
         </Stack>
       </CardContent>
     </Card>
