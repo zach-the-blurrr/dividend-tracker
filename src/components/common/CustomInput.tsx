@@ -26,6 +26,13 @@ const CustomInput = ({
       size="small"
       fullWidth
       sx={{ mt: 3, mb: 1 }}
+      slotProps={{
+        input: {
+          inputProps: {
+            min: 0,
+          },
+        },
+      }}
     />
   );
 };
