@@ -1,6 +1,11 @@
 import {atom} from "recoil";
 
-export const favoritesAtom = atom<string[]>({
+interface FavoriteStock {
+    symbol: string;
+    holdings: number;
+}
+
+export const favoritesAtom = atom<FavoriteStock[]>({
     key: "favorites",
     default: [],
     effects: [({ setSelf, onSet}) => {
