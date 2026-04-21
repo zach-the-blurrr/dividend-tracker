@@ -1,13 +1,21 @@
 import { Box } from "@mui/system";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material/styles";
+import { useRecoilValue } from "recoil";
 import ToolTip from "./ToolTip";
+import { favoritesAtom } from "../../atoms/favorites/favoritesAtom";
+import { useEffect } from "react";
+import type { ProjectionSeries } from "../../types/projections/ProjectionSeries";
 
 const ProjectionPage = () => {
+  const favorites = useRecoilValue(favoritesAtom);
   const theme = useTheme();
 
-  //TODO: replace this with real data we pass into the component
-  const sampleData = [
+  useEffect(() => {
+    calculateProjections();
+  }, [favorites]);
+
+  const chartData: ProjectionSeries[] = [
     {
       id: "Projected Income",
       data: [
@@ -27,10 +35,12 @@ const ProjectionPage = () => {
     },
   ];
 
+  const calculateProjections = () => {};
+
   return (
     <Box sx={{ height: 600, width: 800 }}>
       <ResponsiveLine
-        data={sampleData}
+        data={chartData}
         margin={{ top: 20, right: 20, bottom: 60, left: 60 }}
         xScale={{ type: "point" }}
         yScale={{ type: "linear", min: "auto", max: "auto" }}
